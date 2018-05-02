@@ -29,4 +29,5 @@ public class LazyFour {
     private static class LazyHolder {
         private static final LazyFour LAZY = new LazyFour();
     }
+
 }

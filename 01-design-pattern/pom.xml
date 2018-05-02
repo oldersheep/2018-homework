@@ -11,6 +11,7 @@
   <modules>
     <module>01-factory-pattern</module>
       <module>02-singleton-pattern</module>
+      <module>03-prototype-pattern</module>
   </modules>
 
   <name>01-design-pattern</name>

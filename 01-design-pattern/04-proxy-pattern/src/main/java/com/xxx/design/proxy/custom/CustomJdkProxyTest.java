@@ -1,6 +1,6 @@
 package com.xxx.design.proxy.custom;
 
-public class Test {
+public class CustomJdkProxyTest {
 
     public static void main(String[] args) {
         Dao dao = (Dao) new Service().getInstance(new DaoImpl());

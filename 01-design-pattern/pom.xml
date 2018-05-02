@@ -14,6 +14,7 @@
       <module>03-prototype-pattern</module>
       <module>04-proxy-pattern</module>
       <module>05-strategy-pattern</module>
+    <module>06-template-pattern</module>
   </modules>
 
   <name>01-design-pattern</name>

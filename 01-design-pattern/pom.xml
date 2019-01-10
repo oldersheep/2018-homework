@@ -15,6 +15,10 @@
       <module>04-proxy-pattern</module>
       <module>05-strategy-pattern</module>
     <module>06-template-pattern</module>
+      <module>07-delegate-pattern</module>
+      <module>08-adapter-pattern</module>
+      <module>09-decorator-pattern</module>
+      <module>10-observer-pattern</module>
   </modules>
 
   <name>01-design-pattern</name>
@@ -32,6 +36,11 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
     </dependency>
   </dependencies>
 

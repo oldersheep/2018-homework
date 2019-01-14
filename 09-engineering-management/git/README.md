@@ -56,19 +56,65 @@ index中是一些二进制的内容，看不了
 
 ![objects文件夹内容](objects.png)
 
-`echo "test" | git hash-object -w --stdin` #输出一段hash值,例如 00eriwu83sd92
 
-`find .git/objects/ -type -f` # 可以找到00/eriwu83sd92 这个文件夹
 
-`git cat-file -t 00eriwu83sd92` #可以查看到test字符串
+#### 一波操作
 
-`echo "test" > test.txt` 
+* `echo "test" | git hash-object -w --stdin` 
 
-`git hash-object -w test.txt` #又输出一段hash值
+  输出一段hash值, 为9daeafb9864cf43055ae93beb0afd6c7d144bfa4
 
-`git cat-file -t 00eriwu83sd92` # 这时看到了一个blob
 
-`git cat-file -p master ^{tree}`  #这里无法描述
+* `find .git/objects/ -type f` 
+
+  可以找到9d/aeafb9864cf43055ae93beb0afd6c7d144bfa4 这个文件夹
+
+* `git cat-file -p 9daeafb9864cf43055ae93beb0afd6c7d144bfa4`
+
+  可以查看到test字符串
+
+![这波操作的截图](git-string.png)
+
+___
+
+
+
+* `echo "demo" > demo.txt` 
+
+* `git hash-object -w demo.txt`
+
+  输出一段hash值, 为1549b67ca5936e6893c89221d508697e7e97d42b
+
+
+* `git cat-file -t 1549b67ca5936e6893c89221d508697e7e97d42b`
+
+   查看文件类型，这时看到了一个blob
+
+  ![这波操作的截图](git-blob.png)
+
+___
+
+* `git cat-file -p master^{tree}` 
+
+  查看到第二种对象类型，tree，相当于文件夹类型，下面存放的仍然是blob类型
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

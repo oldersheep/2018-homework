@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!-- 尽量别用绝对路径，如果带参数不同容器路径解释可能不同,以下配置参数在pom.xml里 -->
+    <property name="log.root.level" value="${log.root.level}"/> <!-- 日志级别 -->
+    <property name="log.home" value="${log.home}"/>  <!-- 日志路径，这里是相对路径， -->
+
+    <!-- app log -->
+    <appender name="dagon_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/DAGON.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - [%thread] %-5level - %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- info log -->
+    <appender name="DAGON_INFO_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/info-dagon.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/info-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - [%thread] %-5level - %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- debug log -->
+    <appender name="DAGON_DEBUG_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/debug-dagon.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/debug-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - [%thread] %-5level - %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- monitor log -->
+    <appender name="MONITOR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/monitor-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/monitor-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- connection log -->
+    <appender name="CONNECTION_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/conn-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/conn-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- push log -->
+    <appender name="PUSH_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/push-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/push-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- heartbeat log -->
+    <appender name="HEARTBEAT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/heartbeat-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/heartbeat-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- cache log -->
+    <appender name="CACHE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/cache-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/cache-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- http log -->
+    <appender name="HTTP_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/http-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/http-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SRD log -->
+    <appender name="SRD_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/srd-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/srd-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- profile log -->
+    <appender name="PROFILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home}/profile-dagon.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home}/profile-dagon.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder charset="UTF-8">
+            <pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="${log.root.level}"/>
+        <appender-ref ref="DAGON_APPENDER"/>
+        <appender-ref ref="DAGON_INFO_APPENDER"/>
+        <appender-ref ref="DAGON_DEBUG_APPENDER"/>
+    </root>
+
+    <logger name="console" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="dagon.conn.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="CONNECTION_APPENDER"/>
+    </logger>
+    <logger name="dagon.heartbeat.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="HEARTBEAT_APPENDER"/>
+    </logger>
+    <logger name="dagon.http.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="HTTP_APPENDER"/>
+    </logger>
+    <logger name="dagon.monitor.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="MONITOR_APPENDER"/>
+    </logger>
+    <logger name="dagon.push.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="PUSH_APPENDER"/>
+    </logger>
+    <logger name="dagon.cache.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="CACHE_APPENDER"/>
+    </logger>
+    <logger name="dagon.srd.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="SRD_APPENDER"/>
+    </logger>
+    <logger name="dagon.profile.log" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="PROFILE_APPENDER"/>
+    </logger>
+
+    <logger name="org.apache.zookeeper.ClientCnxn" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="DAGON_APPENDER"/>
+    </logger>
+</configuration>

@@ -146,6 +146,7 @@ public class ApplicationContext implements BeanFactory {
         return null;
     }
 
+    // 依赖注入
     private void populateBean(String beanName, Object instance) {
         Class<?> clazz = instance.getClass();
         if (!clazz.isAnnotationPresent(Controller.class) && !clazz.isAnnotationPresent(Service.class)) {
@@ -162,7 +163,12 @@ public class ApplicationContext implements BeanFactory {
                     autowiredBeanName = field.getType().getName();
                 }
                 field.setAccessible(true);
-                field.set(instance, this.beanWrapperMap.get(autowiredBeanName).getWrappedInstance());
+                // 当需要注入的类还不存在时，需要做的事情
+                if (!beanWrapperMap.containsKey(autowiredBeanName)) {
+                    getBean(autowiredBeanName);
+                }
+                BeanWrapper beanWrapper = this.beanWrapperMap.get(autowiredBeanName);
+                field.set(instance, beanWrapper.getWrappedInstance());
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }

@@ -1,7 +1,5 @@
 package com.xxx.spring.framework.core;
 
-import com.sun.istack.internal.Nullable;
-
 public interface BeanFactory {
 
     //对FactoryBean的转义定义，因为如果使用bean的名字检索FactoryBean得到的对象是工厂生成的对象，

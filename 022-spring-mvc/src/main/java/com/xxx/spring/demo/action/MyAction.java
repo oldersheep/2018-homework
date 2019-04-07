@@ -2,7 +2,7 @@ package com.xxx.spring.demo.action;
 
 import com.xxx.spring.demo.service.IModifyService;
 import com.xxx.spring.demo.service.IQueryService;
-import com.xxx.spring.demo.temp.ModelAndView;
+import com.xxx.spring.framework.webmvc.ModelAndView;
 import com.xxx.spring.framework.annotation.Autowired;
 import com.xxx.spring.framework.annotation.Controller;
 import com.xxx.spring.framework.annotation.RequestMapping;

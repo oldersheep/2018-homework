@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ApplicationContext implements BeanFactory {
@@ -95,7 +96,7 @@ public class ApplicationContext implements BeanFactory {
     @Override
     public Object getBean(String name) {
         BeanDefinition beanDefinition = this.beanDefinitionMap.get(name);
-        String className = beanDefinition.getBeanClassName();
+        // String className = beanDefinition.getBeanClassName();
         try {
 
             // 生成通知事件
@@ -173,5 +174,17 @@ public class ApplicationContext implements BeanFactory {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getBeanDefinitionCount() {
+        return this.beanDefinitionMap.size();
+    }
+
+    public String[] getBeanDefinitionNames() {
+        return this.beanDefinitionMap.keySet().toArray(new String[this.beanDefinitionMap.size()]);
+    }
+
+    public Properties getConfig() {
+        return this.reader.getConfig();
     }
 }

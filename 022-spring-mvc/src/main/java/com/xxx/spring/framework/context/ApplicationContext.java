@@ -3,26 +3,31 @@ package com.xxx.spring.framework.context;
 import com.xxx.spring.framework.annotation.Autowired;
 import com.xxx.spring.framework.annotation.Controller;
 import com.xxx.spring.framework.annotation.Service;
+import com.xxx.spring.framework.aop.AopConfig;
 import com.xxx.spring.framework.beans.BeanDefinition;
 import com.xxx.spring.framework.beans.BeanPostProcessor;
 import com.xxx.spring.framework.beans.BeanWrapper;
 import com.xxx.spring.framework.context.support.BeanDefinitionReader;
+import com.xxx.spring.framework.context.support.DefaultListableBeanFactory;
 import com.xxx.spring.framework.core.BeanFactory;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ApplicationContext implements BeanFactory {
+public class ApplicationContext extends DefaultListableBeanFactory implements BeanFactory {
 
     private String[] configLocations;
 
     private BeanDefinitionReader reader;
 
-    private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
+    //private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
 
     // 用来保证注册式单例的容器
     private Map<String, Object> beanCacheMap = new HashMap<>();
@@ -34,7 +39,7 @@ public class ApplicationContext implements BeanFactory {
         this.refresh();
     }
 
-    public void refresh() {
+    private void refresh() {
 
         // 定位
         this.reader = new BeanDefinitionReader(configLocations);
@@ -56,7 +61,8 @@ public class ApplicationContext implements BeanFactory {
         for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : this.beanDefinitionMap.entrySet()) {
             String beanName = beanDefinitionEntry.getKey();
             if (!beanDefinitionEntry.getValue().isLazyInit()) {
-                getBean(beanName);
+                Object bean = getBean(beanName);
+                System.out.println(bean);
             }
         }
     }
@@ -69,7 +75,7 @@ public class ApplicationContext implements BeanFactory {
 
                 Class<?> beanClass = Class.forName(className);
 
-                /**
+                /*
                  * 需考虑三种情况 1、默认首字母小写 2、自定义名称 3、接口注入
                  */
                 if (beanClass.isInterface()) {
@@ -111,6 +117,7 @@ public class ApplicationContext implements BeanFactory {
             if (instance == null) { return null;}
 
             BeanWrapper beanWrapper = new BeanWrapper(instance);
+            beanWrapper.setAopConfig(instantionAopConfig(beanDefinition));
             beanWrapper.setPostProcessor(beanPostProcessor);
             this.beanWrapperMap.put(name, beanWrapper);
 
@@ -186,5 +193,29 @@ public class ApplicationContext implements BeanFactory {
 
     public Properties getConfig() {
         return this.reader.getConfig();
+    }
+
+    private AopConfig instantionAopConfig(BeanDefinition beanDefinition) throws Exception {
+
+        AopConfig config = new AopConfig();
+        String expression = getConfig().getProperty("pointcut");
+        String[] before = getConfig().getProperty("aspectBefore").split("\\s");
+        String[] after = getConfig().getProperty("aspectAfter").split("\\s");
+
+        String className = beanDefinition.getBeanClassName();
+        Class<?> clazz = Class.forName(className);
+
+        Pattern pattern = Pattern.compile(expression);
+
+        Class<?> aspect = Class.forName(before[0]);
+        // 这里的方法是原生的方法
+        for (Method method : clazz.getMethods()) {
+            Matcher matcher = pattern.matcher(method.toString());
+            if (matcher.matches()) {
+                config.put(method, aspect.newInstance(), new Method[]{aspect.getMethod(before[1]), aspect.getMethod(after[1])});
+            }
+        }
+
+        return config;
     }
 }

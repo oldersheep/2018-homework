@@ -3,6 +3,7 @@ package com.xxx.spring.framework.webmvc.servlet;
 import com.xxx.spring.framework.annotation.Controller;
 import com.xxx.spring.framework.annotation.RequestMapping;
 import com.xxx.spring.framework.annotation.RequestParam;
+import com.xxx.spring.framework.aop.AopProxyUtils;
 import com.xxx.spring.framework.context.ApplicationContext;
 import com.xxx.spring.framework.webmvc.HandlerAdapter;
 import com.xxx.spring.framework.webmvc.HandlerMapping;
@@ -83,37 +84,40 @@ public class DispatcherServlet extends HttpServlet {
 
     // 将URL与Controller中的Method的对应
     private void initHandlerMappings(ApplicationContext context) {
-
-        // 从容器中取到所有的实例
-        String[] beanNames = context.getBeanDefinitionNames();
-        for (String beanName : beanNames) {
-            // 这里取出所有注册的bean，而后只取Controller
-            Object controller = context.getBean(beanName);
-
-            Class<?> clazz = controller.getClass();
-            if (!clazz.isAnnotationPresent(Controller.class)) {
-                continue;
-            }
-
-            String baseUrl = "";
-            if (clazz.isAnnotationPresent(RequestMapping.class)) {
-                RequestMapping requestMapping = clazz.getAnnotation(RequestMapping.class);
-                baseUrl = requestMapping.value();
-            }
-
-            // 扫描所有的方法
-            Method[] methods = clazz.getMethods();
-            for (Method method : methods) {
-                if (!method.isAnnotationPresent(RequestMapping.class)) {
+        try {
+            // 从容器中取到所有的实例
+            String[] beanNames = context.getBeanDefinitionNames();
+            for (String beanName : beanNames) {
+                // 这里取出所有注册的bean，而后只取Controller
+                Object proxy = context.getBean(beanName);
+                Object controller = AopProxyUtils.getTargetObject(proxy);
+                Class<?> clazz = controller.getClass();
+                if (!clazz.isAnnotationPresent(Controller.class)) {
                     continue;
                 }
 
-                RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
-                String regex = ("/" + baseUrl + requestMapping.value().replaceAll("\\*", ".*")).replaceAll("/+", "/");
-                Pattern pattern = Pattern.compile(regex);
-                this.handlerMappings.add(new HandlerMapping(controller, method, pattern));
-                System.out.println("Mapping: " + regex + "," + method);
+                String baseUrl = "";
+                if (clazz.isAnnotationPresent(RequestMapping.class)) {
+                    RequestMapping requestMapping = clazz.getAnnotation(RequestMapping.class);
+                    baseUrl = requestMapping.value();
+                }
+
+                // 扫描所有的方法
+                Method[] methods = clazz.getMethods();
+                for (Method method : methods) {
+                    if (!method.isAnnotationPresent(RequestMapping.class)) {
+                        continue;
+                    }
+
+                    RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+                    String regex = ("/" + baseUrl + requestMapping.value().replaceAll("\\*", ".*")).replaceAll("/+", "/");
+                    Pattern pattern = Pattern.compile(regex);
+                    this.handlerMappings.add(new HandlerMapping(controller, method, pattern));
+                    System.out.println("Mapping: " + regex + "," + method);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -183,7 +187,9 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private HandlerMapping getHandler(HttpServletRequest req) {
-        if (this.handlerMappings.isEmpty()) {return null;}
+        if (this.handlerMappings.isEmpty()) {
+            return null;
+        }
 
         String url = req.getRequestURI();
         String contextPath = req.getContextPath();
@@ -202,14 +208,20 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private HandlerAdapter getHandlerAdapter(HandlerMapping handler) {
-        if (this.handlerAdapters.isEmpty()) {return null;}
+        if (this.handlerAdapters.isEmpty()) {
+            return null;
+        }
         return this.handlerAdapters.get(handler);
     }
 
     private void processDispatchResult(HttpServletResponse resp, HandlerMapping mappedHandler, ModelAndView mv) throws Exception {
-        if (mv == null) {return;}
+        if (mv == null) {
+            return;
+        }
 
-        if (this.viewResolvers.isEmpty()) {return;}
+        if (this.viewResolvers.isEmpty()) {
+            return;
+        }
 
         for (ViewResolver viewResolver : this.viewResolvers) {
             if (!mv.getViewName().equals(viewResolver.getViewName())) {
@@ -225,11 +237,22 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     // ======= 方法不实现区
-    private void initMultipartResolver(ApplicationContext context) {}
-    private void initLocaleResolver(ApplicationContext context) {}
-    private void initThemeResolver(ApplicationContext context) {}
-    private void initHandlerExceptionResolvers(ApplicationContext context) {}
-    private void initRequestToViewNameTranslator(ApplicationContext context) {}
-    private void initFlashMapManager(ApplicationContext context) {}
+    private void initMultipartResolver(ApplicationContext context) {
+    }
+
+    private void initLocaleResolver(ApplicationContext context) {
+    }
+
+    private void initThemeResolver(ApplicationContext context) {
+    }
+
+    private void initHandlerExceptionResolvers(ApplicationContext context) {
+    }
+
+    private void initRequestToViewNameTranslator(ApplicationContext context) {
+    }
+
+    private void initFlashMapManager(ApplicationContext context) {
+    }
     // ======= END
 }

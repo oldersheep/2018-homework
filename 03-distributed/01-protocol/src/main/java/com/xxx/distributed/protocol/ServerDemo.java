@@ -9,7 +9,6 @@ import java.net.Socket;
 /**
  * @ClassName ServerDemo
  * @Description 这里是得不到响应，就不能再发，单线程的响应
- * @Author aitaiyo
  * @Date 2019/4/25 21:57
  * @Version 1.0
  */

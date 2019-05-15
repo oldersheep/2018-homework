@@ -1,4 +1,4 @@
-package com.xxx.zookeeper;
+package com.xxx.zookeeper.imooc;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -6,11 +6,16 @@ import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * 第一个：zk连接的demo
+ */
 public class ZKConnect implements Watcher {
 		
 	final static Logger log = LoggerFactory.getLogger(ZKConnect.class);
 
-	public static final String zkServerPath = "192.168.0.103:2181,192.168.0.104:2181,192.168.0.106:2181";
+	public static final String zkServerPath = "192.168.0.111:2181,192.168.0.112:2181,192.168.0.113:2181";
 	public static final Integer timeout = 5000;
 	
 	public static void main(String[] args) throws Exception {

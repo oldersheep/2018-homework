@@ -1,4 +1,4 @@
-package com.xxx.zookeeper;
+package com.xxx.zookeeper.imooc;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,10 +6,8 @@ import java.util.List;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
-import org.apache.zookeeper.data.Stat;
 
 public class ZKNodeOperator implements Watcher {
 

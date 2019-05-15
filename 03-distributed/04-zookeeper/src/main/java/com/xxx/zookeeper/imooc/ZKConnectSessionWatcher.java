@@ -1,4 +1,4 @@
-package com.xxx.zookeeper;
+package com.xxx.zookeeper.imooc;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -10,7 +10,7 @@ public class ZKConnectSessionWatcher implements Watcher {
 	
 	final static Logger log = LoggerFactory.getLogger(ZKConnectSessionWatcher.class);
 
-	public static final String zkServerPath = "192.168.0.103:2181,192.168.0.104:2181,192.168.0.106:2181";
+	public static final String zkServerPath = "192.168.0.111:2181,192.168.0.112:2181,192.168.0.113:2181";
 	public static final Integer timeout = 5000;
 	
 	public static void main(String[] args) throws Exception {

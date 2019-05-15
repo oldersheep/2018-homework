@@ -1,11 +1,11 @@
-package com.xxx.zookeeper.countdown;
+package com.xxx.zookeeper.imooc.countdown;
 
 import java.util.concurrent.CountDownLatch;
 
-public class StationJiangsuSanling extends DangerCenter {
+public class StationBeijingShaHe extends DangerCenter {
 
-	public StationJiangsuSanling(CountDownLatch countDown) {
-		super(countDown, "江苏三林调度站");
+	public StationBeijingShaHe(CountDownLatch countDown) {
+		super(countDown, "北京沙河调度站");
 	}
 
 	@Override
@@ -13,7 +13,7 @@ public class StationJiangsuSanling extends DangerCenter {
 		System.out.println("正在检查 [" + this.getStation() + "]...");
 		
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

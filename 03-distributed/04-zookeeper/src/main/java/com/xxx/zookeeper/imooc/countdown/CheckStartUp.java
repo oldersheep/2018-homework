@@ -1,4 +1,4 @@
-package com.xxx.zookeeper.countdown;
+package com.xxx.zookeeper.imooc.countdown;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CheckStartUp {
 		
 		// 把所有站点添加进list
 		stationList = new ArrayList<>();
-		stationList.add(new StationBeijingIMooc(countDown));
+		stationList.add(new StationBeijingShaHe(countDown));
 		stationList.add(new StationJiangsuSanling(countDown));
 		stationList.add(new StationShandongChangchuan(countDown));
 		

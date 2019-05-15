@@ -1,4 +1,4 @@
-package com.xxx.zookeeper.countdown;
+package com.xxx.zookeeper.imooc.countdown;
 
 import java.util.concurrent.CountDownLatch;
 

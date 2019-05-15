@@ -1,4 +1,4 @@
-package com.xxx.zookeeper;
+package com.xxx.zookeeper.imooc;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;

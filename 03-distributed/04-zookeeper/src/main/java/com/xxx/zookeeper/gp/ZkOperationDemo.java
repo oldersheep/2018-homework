@@ -17,9 +17,9 @@ public class ZkOperationDemo {
 
     final static Logger log = LoggerFactory.getLogger(ZkOperationDemo.class);
 
-    public static final String zkServerPath = "192.168.0.111:2181,192.168.0.112:2181,192.168.0.113:2181";
-    public static final Integer timeout = 5000;
-    public static final String path = "/zk-persist-node";
+    private static final String zkServerPath = "192.168.0.111:2181,192.168.0.112:2181,192.168.0.113:2181";
+    private static final Integer timeout = 5000;
+    private static final String path = "/zk-persist-node";
 
     public static void main(String[] args) {
         final CountDownLatch countDownLatch = new CountDownLatch(1);

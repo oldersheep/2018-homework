@@ -9,9 +9,11 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
+        <module>01-protocol</module>
+        <module>03-rmi-client</module>
+        <module>03-rmi-service</module>
         <module>04-zookeeper</module>
         <module>10-netty</module>
-        <module>01-protocol</module>
     </modules>
 
     <name>03-distributed</name>

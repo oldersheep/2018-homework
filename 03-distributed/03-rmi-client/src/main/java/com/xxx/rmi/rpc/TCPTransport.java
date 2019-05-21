@@ -10,17 +10,23 @@ import java.net.Socket;
  * @Version 1.0
  */
 public class TCPTransport {
-    private String host;
+    /*private String host;
     private int port;
-
     public TCPTransport(String host, int port) {
         this.host = host;
         this.port = port;
+    }*/
+
+    private String serviceAddress;
+
+    public TCPTransport(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
     }
 
     public Object send(RpcRequest request) {
         System.out.println("创建一个新的连接....");
-        try (Socket socket = new Socket(host, port);
+        String[] arrays = serviceAddress.split(":");
+        try (Socket socket = new Socket(arrays[0], Integer.valueOf(arrays[1]));
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())){
 

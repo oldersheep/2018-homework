@@ -1,5 +1,7 @@
 package com.xxx.rmi.rpc;
 
+import com.xxx.rmi.rpc.zk.ServiceDiscovery;
+
 import java.lang.reflect.Proxy;
 
 /**
@@ -9,9 +11,15 @@ import java.lang.reflect.Proxy;
  */
 public class RpcClientProxy {
 
-    public <T> T clientProxy(final Class<T> interfacesClass, final String host, final int port) {
+    private ServiceDiscovery serviceDiscovery;
+
+    public RpcClientProxy(ServiceDiscovery serviceDiscovery) {
+        this.serviceDiscovery = serviceDiscovery;
+    }
+
+    public <T> T clientProxy(final Class<T> interfacesClass, String version) {
 
         return (T) Proxy.newProxyInstance(interfacesClass.getClassLoader(),
-                new Class[]{interfacesClass}, new RemoteInvocationHandler(host, port));
+                new Class[]{interfacesClass}, new RemoteInvocationHandler(serviceDiscovery, version));
     }
 }

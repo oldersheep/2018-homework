@@ -10,16 +10,16 @@ import java.rmi.server.UnicastRemoteObject;
  * @Date 2019/5/20 20:37
  * @Version 1.0
  */
-@RemoteService(HelloService.class)
-public class HelloServiceImpl extends UnicastRemoteObject implements HelloService {
+@RemoteService(value = HelloService.class, version = "2.0")
+public class HelloServiceImpl2 extends UnicastRemoteObject implements HelloService {
 
-    public HelloServiceImpl() throws RemoteException {
+    public HelloServiceImpl2() throws RemoteException {
         super();
     }
 
     @Override
     public String sayHello(String message) throws RemoteException {
 
-        return "Hello " + message;
+        return "Hello 2.0, " + message;
     }
 }

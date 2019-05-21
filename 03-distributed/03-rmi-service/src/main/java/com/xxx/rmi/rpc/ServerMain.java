@@ -2,8 +2,9 @@ package com.xxx.rmi.rpc;
 
 import com.xxx.rmi.HelloService;
 import com.xxx.rmi.HelloServiceImpl;
-
-import java.rmi.RemoteException;
+import com.xxx.rmi.HelloServiceImpl2;
+import com.xxx.rmi.rpc.zk.RegisterCenter;
+import com.xxx.rmi.rpc.zk.RegisterCenterImpl;
 
 /**
  * @Description
@@ -12,9 +13,13 @@ import java.rmi.RemoteException;
  */
 public class ServerMain {
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws Exception {
         HelloService helloService = new HelloServiceImpl();
-        RpcServer rpcServer = new RpcServer();
-        rpcServer.publisher(helloService, 8888);
+        HelloService helloService2 = new HelloServiceImpl2();
+        RegisterCenter registerCenter = new RegisterCenterImpl();
+        RpcServer rpcServer = new RpcServer(registerCenter, "127.0.0.1:8088");
+        rpcServer.bind(helloService, helloService2);
+        rpcServer.publisher();
+        System.in.read();
     }
 }

@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.net.Socket;
+import java.util.Map;
 
 /**
  * @Description
@@ -13,11 +14,11 @@ import java.net.Socket;
 public class ProcessorHandler implements Runnable {
 
     private Socket socket;
-    private Object service;
+    private Map<String, Object> handlerMap;
 
-    public ProcessorHandler(Socket socket, Object service) {
+    public ProcessorHandler(Socket socket, Map<String, Object> handlerMap) {
         this.socket = socket;
-        this.service = service;
+        this.handlerMap = handlerMap;
     }
 
     @Override
@@ -40,6 +41,13 @@ public class ProcessorHandler implements Runnable {
         for (int i = 0; i < args.length; i++) {
             types[i] = args[i].getClass();
         }
+
+        String serviceName = request.getClassName();
+        String version = request.getVersion();
+        if (version != null && !"".equals(version)) {
+            serviceName = serviceName + "-" + version;
+        }
+        Object service = handlerMap.get(serviceName);
         Method method = service.getClass().getMethod(request.getMethodName(), types);
         return method.invoke(service, args);
     }

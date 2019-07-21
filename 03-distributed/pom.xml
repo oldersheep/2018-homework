@@ -13,7 +13,13 @@
         <module>03-rmi-client</module>
         <module>03-rmi-service</module>
         <module>04-zookeeper</module>
-        <module>10-netty</module>
+        <module>13-netty</module>
+        <module>05-dubbo-client</module>
+        <module>05-dubbo-server</module>
+        <module>06-activemq-producer</module>
+        <module>06-activemq-consumer</module>
+        <module>06-activemq-consumer</module>
+        <module>10-redis</module>
     </modules>
 
     <name>03-distributed</name>
@@ -32,12 +38,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>

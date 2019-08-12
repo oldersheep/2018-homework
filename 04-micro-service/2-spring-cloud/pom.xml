@@ -14,8 +14,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>1-cloud-native-application</module>
-        <module>3-service-discovery</module>
         <module>2-config-center</module>
+        <module>3-service-discovery-eureka</module>
+        <module>3-service-discovery-zk</module>
         <module>5-circuit-breaker</module>
         <module>6-service-call</module>
     </modules>

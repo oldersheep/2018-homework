@@ -1,6 +1,6 @@
-package com.xxx.design.observer.mouse;
+package com.xxx.design.observer.event.mouse;
 
-import com.xxx.design.observer.core.Event;
+import com.xxx.design.observer.event.core.Event;
 
 public class MouseEventCallback {
 

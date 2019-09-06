@@ -1,6 +1,6 @@
-package com.xxx.design.observer.subject;
+package com.xxx.design.observer.event.subject;
 
-import com.xxx.design.observer.core.EventListener;
+import com.xxx.design.observer.event.core.EventListener;
 
 public class Subject extends EventListener {
 

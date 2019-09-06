@@ -1,6 +1,9 @@
-package com.xxx.design.observer.subject;
+package com.xxx.design.observer.event;
 
-import com.xxx.design.observer.core.Event;
+import com.xxx.design.observer.event.core.Event;
+import com.xxx.design.observer.event.subject.Observer;
+import com.xxx.design.observer.event.subject.Subject;
+import com.xxx.design.observer.event.subject.SubjectEnumType;
 
 import java.lang.reflect.Method;
 

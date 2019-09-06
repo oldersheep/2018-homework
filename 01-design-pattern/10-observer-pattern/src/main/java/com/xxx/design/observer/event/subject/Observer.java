@@ -1,6 +1,6 @@
-package com.xxx.design.observer.subject;
+package com.xxx.design.observer.event.subject;
 
-import com.xxx.design.observer.core.Event;
+import com.xxx.design.observer.event.core.Event;
 
 public class Observer {
 

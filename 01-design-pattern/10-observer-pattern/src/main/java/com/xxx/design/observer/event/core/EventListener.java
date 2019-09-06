@@ -1,4 +1,4 @@
-package com.xxx.design.observer.core;
+package com.xxx.design.observer.event.core;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

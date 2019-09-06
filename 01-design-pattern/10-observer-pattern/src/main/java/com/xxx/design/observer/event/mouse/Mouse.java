@@ -1,6 +1,6 @@
-package com.xxx.design.observer.mouse;
+package com.xxx.design.observer.event.mouse;
 
-import com.xxx.design.observer.core.EventListener;
+import com.xxx.design.observer.event.core.EventListener;
 
 public class Mouse extends EventListener {
 

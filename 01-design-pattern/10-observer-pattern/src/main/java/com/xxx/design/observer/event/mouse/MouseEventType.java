@@ -1,4 +1,4 @@
-package com.xxx.design.observer.mouse;
+package com.xxx.design.observer.event.mouse;
 
 public enum MouseEventType {
 

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.xxx.spring</groupId>
-  <artifactId>022-spring-mvc</artifactId>
+  <artifactId>02-spring-mvc</artifactId>
   <version>1.0.0</version>
   <packaging>war</packaging>
 

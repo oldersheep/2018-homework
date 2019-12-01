@@ -9,17 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>2-spring-cloud</artifactId>
-
+    <artifactId>3-cloud-application</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>1-cloud-native-application</module>
-        <module>2-config-center</module>
-        <module>3-service-discovery-eureka</module>
-        <module>3-service-discovery-zk</module>
-        <module>5-circuit-breaker</module>
-        <module>6-service-call</module>
-        <module>7-api-gateway</module>
+        <module>1-service-provider-application</module>
+        <module>2-service-consumer-application</module>
+        <module>3-service-gateway</module>
     </modules>
 
 
